@@ -12,7 +12,7 @@ const questions = [
     "Please enter your panel API key: ",
     "Please enter your bot token: ",
     "Please enter your channel ID: ",
-    "Please enter your Server ID: "
+    "Please enter your server ID: "
 ];
 
 const Question = {
@@ -122,7 +122,7 @@ module.exports = function Setup() {
                         process.exit()
                     })
                 }).catch((error) => {
-                    console.log(" \n" + cliColor.redBright("❌ Invalid Server UUID."));
+                    console.log(" \n" + cliColor.redBright("❌ Invalid Server ID."));
                     if (error.code === "ENOTFOUND") {
                         console.log(cliColor.cyanBright("[PSS] ") + cliColor.redBright("ENOTFOUND | DNS Error. Ensure your network connection and DNS server are functioning correctly."));
                     } else if (error.code === "ECONNREFUSED") {
