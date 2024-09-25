@@ -4,6 +4,7 @@ const bit = require("prettier-bytes");
 const WebSocket = require('ws');
 const cliColor = require("cli-color");
 const bytes = require("bytes");
+const config = require("./configuration.js");
 const UptimeFormatter = require("./UptimeFormatter");
 const { Client, GatewayIntentBits, EmbedBuilder, time } = require("discord.js");
 
@@ -44,52 +45,68 @@ module.exports = async function Application() {
 			    const messages = await channel.messages.fetch({ limit: 10 });
                 const botMessage = messages.find(msg => msg.author.id === client.user.id);
 
-			    const embeds = [
-				    new EmbedBuilder()
-						.setTitle(`Server Stats`)
-						.setDescription(`Next update ${time(new Date(Date.now() + 10000), "R")}`)
-					    .addFields(
-						    {
-								name: "State",
-								value: resource.state.split("")[0].toUpperCase() + resource.state.slice(1),
-							},
-						    {
-							    name: "Memory Usage",
-							    value: `\`${bytes.format(resource.memory_bytes, { unitSeparator: " " })}\` / \`${server.limits.memory === 0 ? "∞`" : bit(server.limits.memory * 1000000) + "`"}`
-						    },
-						    {
-							    name: "Disk Usage",
-							    value: `\`${bytes.format(resource.disk_bytes, { unitSeparator: " " })}\` / \`${server.limits.disk === 0 ? "∞`" : bit(server.limits.disk * 1000000) + "`"}`
-						    },
-						    {
-							    name: "CPU Load",
-							    value: `\`${resource.cpu_absolute.toFixed(2)}%\``
-						    },
-							{
-								name: "Network",
-								value: 
-								    `Upload: \`${bytes.format(resource.network.rx_bytes, { unitSeparator: " " })}\`\n` +
-									`Download: \`${bytes.format(resource.network.tx_bytes, { unitSeparator: " " })}\`` 
-							},
-						    {
-							    name: "Uptime",
-							    value: `\`${UptimeFormatter(resource.uptime)}\``
-						    }
-					    )
-			    ]
+			    const embed = new EmbedBuilder()
+                    .setAuthor({
+						name: config.embed.author.name || null,
+						iconURL: config.embed.author.icon || null
+					})
+					.setTitle(config.embed.title || null)
+					.setDescription(config.embed.description.replaceAll("{{time}}", time(new Date(Date.now() + 10000), "R")) || null)
+					.setColor(config.embed.color || null)
+					.setImage(config.embed.image || null)
+				    .setTimestamp(config.embed.timestamp ? new Date() : null)
+					.setThumbnail(config.embed.thumbnail || null)
+					.setFooter({
+						text: config.embed.footer.text || null,
+						iconURL: config.embed.footer.icon || null
+					})
+					
+				if (config.server.details) {
+					embed.addFields({
+						name: "Status",
+						value: ["starting", "online"].includes(resource.state) ? config.status.online : config.status.offline
+					})
+					
+					if (config.server.memory) embed.addFields({
+					    name: "Memory Usage",
+					    value: `\`${bytes.format(resource.memory_bytes, { unitSeparator: " " })}\` / \`${server.limits.memory === 0 ? "∞`" : bit(server.limits.memory * 1000000) + "`"}`
+					})
+					
+					if (config.server.disk) embed.addFields({
+					    name: "Disk Usage",
+					    value: `\`${bytes.format(resource.disk_bytes, { unitSeparator: " " })}\` / \`${server.limits.disk === 0 ? "∞`" : bit(server.limits.disk * 1000000) + "`"}`
+					})
+					
+					if (config.server.cpu) embed.addFields({
+					    name: "CPU Load",
+					    value: `\`${resource.cpu_absolute.toFixed(2)}%\``
+				    })
+					
+					if (config.server.network) embed.addFields({
+						name: "Network",
+						value: 
+						    `Upload: \`${bytes.format(resource.network.rx_bytes, { unitSeparator: " " })}\`\n` +
+							`Download: \`${bytes.format(resource.network.tx_bytes, { unitSeparator: " " })}\`` 
+					})
+					    
+					if (config.server.uptime) embed.addFields({
+					    name: "Uptime",
+					    value: `\`${UptimeFormatter(resource.uptime)}\``
+					})
+				}
 			
 			    const components = []
 			
 			    if (Date.now() > date) {
-				    date = Date.now() + 10000
+				    date = Date.now() + (config.refresh * 1000)
                     if (botMessage) {
 						console.log(cliColor.cyanBright("[PSS] ") + cliColor.green(`Server stats successfully posted to the ${cliColor.blueBright(channel.name)} channel!`));
         
-                        await botMessage.edit({ embeds, components });
+                        await botMessage.edit({ embeds: [embed], components });
                     } else {
 						console.log(cliColor.cyanBright("[PSS] ") + cliColor.green(`Server stats successfully posted to the ${cliColor.blueBright(channel.name)} channel!`));
 
-                        await channel.send({ embeds, components });
+                        await channel.send({ embeds: [embed], components });
                     }
 			    }
 		    } else if (data.event === "console output") console.log(cliColor.yellowBright("[Server] ") + data.args[0])
