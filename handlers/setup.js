@@ -6,13 +6,14 @@ const readline = require('readline').createInterface({
     input: process.stdin,
     output: process.stdout
 });
+const uuid = require("uuid")
 
 const questions = [
     "Please enter your panel URL: ",
     "Please enter your panel API key: ",
-    "Please enter your bot token: ",
-    "Please enter your channel ID: ",
-    "Please enter your server ID: "
+    "Please enter your discord bot token: ",
+    "Please enter your discord channel ID: ",
+    "Please enter your panel server ID: "
 ];
 
 const Question = {
@@ -54,10 +55,13 @@ module.exports = function Setup() {
                 } else if (index === Question.channelId && !/^\d+$/.test(answer)) {
                     console.log(cliColor.redBright("❌ Invalid Channel ID. It must be a number."));
                     isValid = false;
-                }
+                } else if (index === Question.serverID && !uuid.validate(answer)) {
+				    console.log(cliColor.redBright("❌ Invalid Panel Server ID."));
+					isValid = false
+				}
 
                 if (index === Question.panelApiKey && /^(peli_|ptla_)/.test(answer)) {
-                    console.log(cliColor.redBright("❌ Invalid Panel API key. You cannot use Application API Keys."))
+                    console.log(cliColor.redBright("❌ Invalid Panel API key. You cannot use Application API Keys."));
                     isValid = false;
                 }
 
@@ -85,16 +89,16 @@ module.exports = function Setup() {
                         "Authorization": `Bearer ${answers[Question.panelApiKey]}`
                     },
                 }).then(() => {
-                    console.log(cliColor.green("✓ Valid Server ID."));
+                    console.log(cliColor.green("✓ Valid Panel Server ID."));
 
                     const client = new Client({
                         intents: [GatewayIntentBits.Guilds]
                     })
 
                     client.login(answers[Question.botToken]).then(async () => {
-                        console.log(cliColor.green("✓ Valid Discord Bot"));
+                        console.log(cliColor.green("✓ Valid Discord Bot."));
                         client.channels.fetch(answers[Question.channelId]).then(() => {
-                            console.log(cliColor.green("✓ Valid Discord Channel"));
+                            console.log(cliColor.green("✓ Valid Discord Channel."));
 
                             fs.writeFileSync(".setup-complete", "If you want to re-run the setup process, you can delete this file.", "utf8");
 
