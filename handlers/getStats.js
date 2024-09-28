@@ -1,13 +1,24 @@
-const fs = require("node:fs");
-const cliColor = require("cli-color");
-const config = require("./configuration.js");
 const getServerDetails = require("./getServerDetails.js");
 const getServerStats = require("./getServerStats.js");
 const promiseTimeout = require("./promiseTimeout.js");
 const sendMessage = require("./sendMessage.js");
+const { EmbedBuilder } = require("discord.js");
+const config = require("./configuration.js");
+const webhook = require("./webhook.js");
+const cliColor = require("cli-color");
+const path = require("node:path");
+const fs = require("node:fs");
 
 module.exports = async function getStats(client) {
     try {
+	    let cache = (() => {
+            try {
+                return JSON.parse(fs.readFileSync(path.join(__dirname, "../cache.json")))
+            } catch {
+                return false
+            }
+        })()
+		
         console.log(cliColor.cyanBright("[PSS] ") + cliColor.yellow("Fetching server details..."))
         const details = await promiseTimeout(getServerDetails(), config.timeout * 1000);
         if (!details) throw new Error("Failed to get server details");
@@ -15,6 +26,18 @@ module.exports = async function getStats(client) {
         console.log(cliColor.cyanBright("[PSS] ") + cliColor.yellow("Fetching server resources..."))
         const stats = await promiseTimeout(getServerStats(), config.timeout * 1000);
 
+		if (stats.current_state === "missing" && cache?.stats.current_state !== "missing") webhook(
+			new EmbedBuilder()
+			    .setTitle("Server down")
+				.setColor("ED4245")
+                .setDescription(`Server is down.`)
+		) else if (stats.current_state !== "missing" && cache?.stats.current_state === "missing") webhook(
+			new EmbedBuilder()
+			    .setTitle("Server up")
+				.setColor("57F287")
+                .setDescription(`Server is back online.`)
+		)
+		
         const data = {
             details,
             stats,

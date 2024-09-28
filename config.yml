@@ -48,13 +48,13 @@ button:
 #      url: "https://dash2.example.com"
 
 # Status Message Configuration
-# For details on using custom emojis, visit: https://github.com/HirziDevs/PteroServerStats
+# How to user Custom Emoji: https://github.com/HirziDevs/PteroServerStats/blob/main/guide/using-custom-emoji.md
 status:
   online: ":green_circle: Online" # Status message for when a server is online.
   offline: ":red_circle: Offline" # Status message for when a server is offline.
 
 # Server Settings
-# Instructions for retrieving server IDs: https://github.com/HirziDevs/PteroServerStats
+# How to get Server ID: https://github.com/HirziDevs/PteroServerStats/blob/main/guide/getting-server-id.md
 server:
   details: true # Show server details such as memory and disk usage (true/false).
   memory: true # Show server memory usage field (true/false).
@@ -64,6 +64,7 @@ server:
   uptime: true # Show server uptime field (true/false).
 
 # Notifier Configuration
+# How to use webhook: https://github.com/HirziDevs/PteroServerStats/blob/main/guide/notifier.md
 notifier:
   enable: false # Enable or disable notifier.
   webhook: "" # Discord Webhook URL for the notifier.
@@ -80,4 +81,4 @@ notifier:
 
 # Error Logging Configuration
 # Enable logging to console if servers go offline, useful for debugging.
-log_error: true # Set to true to enable error logging.
+log_error: false # Set to true to enable error logging.
