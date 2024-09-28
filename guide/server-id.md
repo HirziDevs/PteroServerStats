@@ -1,4 +1,4 @@
-## Getting Server ID
+## How to get Server ID
 > [!TIP]
 > Make sure you have access to the server.
 

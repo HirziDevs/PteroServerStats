@@ -1,4 +1,4 @@
-## Getting Panel API Key
+## How to get Panel API Key
 > [!TIP]
 > Make sure the owner of the Client API key has access to the server.
 

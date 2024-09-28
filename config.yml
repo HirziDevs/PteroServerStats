@@ -11,7 +11,7 @@ presence:
 
 # Discord Channel and Refresh Timing Configuration
 refresh: 10 # Interval in seconds for refreshing the server's stats.
-timeout: 5
+timeout: 5 # Timeout in seconds for node responses. Adjusting this will affect the overall refresh time.
 
 # Message and Embed Configuration
 # To disable an option, leave the value as an empty string: ''
@@ -48,13 +48,13 @@ button:
 #      url: "https://dash2.example.com"
 
 # Status Message Configuration
-# How to user Custom Emoji: https://github.com/HirziDevs/PteroServerStats/blob/main/guide/using-custom-emoji.md
+# How to user Custom Emoji: https://github.com/HirziDevs/PteroServerStats/blob/main/guide/custom-emoji.md
 status:
   online: ":green_circle: Online" # Status message for when a server is online.
   offline: ":red_circle: Offline" # Status message for when a server is offline.
 
 # Server Settings
-# How to get Server ID: https://github.com/HirziDevs/PteroServerStats/blob/main/guide/getting-server-id.md
+# How to get Server ID: https://github.com/HirziDevs/PteroServerStats/blob/main/guide/server-id.md
 server:
   details: true # Show server details such as memory and disk usage (true/false).
   memory: true # Show server memory usage field (true/false).

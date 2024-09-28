@@ -14,11 +14,11 @@ A Discord App/Bot designed to check server stats running on Pterodactyl or Pelic
 
 ## Guide
 - [Starting the App/Bot](#starting-the-appbot)
-- [Changing Env Configuration](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/changing-env-configuration.md)
-- [Getting an Panel API key](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/getting-panel-api-key.md)
-- [Getting a Channel ID](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/getting-channel-id.md)
-- [Getting a Server ID](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/getting-server-id.md)
-- [Using Custom Emoji](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/using-custom-emoji.md)
+- [Changing Env Configuration](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/env-configuration.md)
+- [How to get Panel API key](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/panel-api-key.md)
+- [How to get Channel ID](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/channel-id.md)
+- [How to get Server ID](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/server-id.md)
+- [Using Custom Emoji](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/custom-emoji.md)
 - [Notifier](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/notifier.md)
 
 ### Starting the App/Bot
@@ -32,14 +32,21 @@ A Discord App/Bot designed to check server stats running on Pterodactyl or Pelic
 
     <img alt="Setup" src="https://usercontent.catto.pictures/hirzi/e0d50227-96e6-4624-9298-c8db67bb333a.png" width="300"/>
 
-    - [Getting an Panel API key](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/getting-panel-api-key.md)
-    - [Getting a Channel ID](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/getting-channel-id.md)
-    - [Getting a Server ID](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/getting-server-id.md)
+    - [How to get Panel API key](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/panel-api-key.md)
+    - [How to get Channel ID](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/channel-id.md)
+    - [How to get Server ID](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/server-id.md)
 
 6. Run `node index.js` if you want to start the app/bot again, and you're done!
 
     <img alt="Console Logging" src="https://usercontent.catto.pictures/hirzi/5d9a51a0-8ac0-4973-93a0-afec1aaed984.png" width="300"/>
+	
+## Similar Projects
+- PteroStats
 
+    PteroStats is a Discord App/Bot designed to check Pterodactyl or Pelican Panel stats and post it to your Discord server.
+	
+	<img alt="PteroStats Preview" src="https://usercontent.catto.pictures/hirzi/e6f6fe6a-8c0e-4c7a-8b73-d4af752324f4.png" width="300"/>
+	
 ## Reporting a Bug
 Enable `log_error` in the `config.yml` file and check the console for the error message. After that, report it to our Discord server at [Support Server](https://discord.znproject.my.id).
 
