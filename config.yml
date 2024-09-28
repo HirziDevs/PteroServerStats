@@ -32,6 +32,8 @@ embed:
     icon: "" # Footer icon URL.
   thumbnail: "" # Thumbnail URL for the embed.
   image: "" # Image URL for the embed.
+  fields:
+    inline: false # Set the embed field to be inline or not (true/false).
   
 # Message Button Configuration
 button:

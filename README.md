@@ -18,7 +18,7 @@ A Discord App/Bot designed to check server stats running on Pterodactyl or Pelic
 - [How to get Panel API key](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/panel-api-key.md)
 - [How to get Channel ID](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/channel-id.md)
 - [How to get Server ID](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/server-id.md)
-- [Using Custom Emoji](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/custom-emoji.md)
+- [How to use Custom Emoji](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/custom-emoji.md)
 - [Notifier](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/notifier.md)
 
 ### Starting the App/Bot
