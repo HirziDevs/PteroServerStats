@@ -11,6 +11,7 @@ presence:
 
 # Discord Channel and Refresh Timing Configuration
 refresh: 10 # Interval in seconds for refreshing the server's stats.
+timeout: 5
 
 # Message and Embed Configuration
 # To disable an option, leave the value as an empty string: ''
@@ -79,4 +80,4 @@ notifier:
 
 # Error Logging Configuration
 # Enable logging to console if servers go offline, useful for debugging.
-log_error: false # Set to true to enable error logging.
+log_error: true # Set to true to enable error logging.

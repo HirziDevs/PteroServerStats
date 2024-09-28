@@ -56,9 +56,9 @@ module.exports = function Setup() {
                     console.log(cliColor.redBright("❌ Invalid Channel ID. It must be a number."));
                     isValid = false;
                 } else if (index === Question.serverID && !uuid.validate(answer)) {
-				    console.log(cliColor.redBright("❌ Invalid Panel Server ID."));
-					isValid = false
-				}
+                    console.log(cliColor.redBright("❌ Invalid Panel Server ID."));
+                    isValid = false
+                }
 
                 if (index === Question.panelApiKey && /^(peli_|ptla_)/.test(answer)) {
                     console.log(cliColor.redBright("❌ Invalid Panel API key. You cannot use Application API Keys."));
