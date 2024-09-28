@@ -20,4 +20,4 @@ console.log(
 
 if (!fs.existsSync(".env") || !fs.existsSync(".setup-complete")) return require("./handlers/setup.js")();
 
-require("./handlers/newApp.js")();
+require("./handlers/application.js")();

@@ -8,16 +8,16 @@
 A Discord App/Bot designed to check server stats running on Pterodactyl or Pelican panel and post it to your Discord server.
 
 ## Preview
-<img alt="PteroServerStats Image Preview" src="image" width="300"/>
+<img alt="PteroServerStats Image Preview" src="https://usercontent.catto.pictures/hirzi/fd17737b-5233-47b1-b9be-5bd69080cd95.png" width="300"/>
 
-<img alt="PteroServerStats Console Preview" src="image" width="300"/>
+<img alt="PteroServerStats Console Preview" src="https://usercontent.catto.pictures/hirzi/5d9a51a0-8ac0-4973-93a0-afec1aaed984.png" width="300"/>
 
 ## Guide
 - [Starting the App/Bot](#starting-the-appbot)
 - [Changing Env Configuration](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/changing-env-configuration.md)
 - [Getting an Panel API key](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/getting-panel-api-key.md)
 - [Getting a Channel ID](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/getting-channel-id.md)
-- [Getting a Server ID]()
+- [Getting a Server ID](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/getting-server-id.md)
 - [Using Custom Emoji](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/using-custom-emoji.md)
 - [Notifier](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/notifier.md)
 
@@ -30,15 +30,15 @@ A Discord App/Bot designed to check server stats running on Pterodactyl or Pelic
 4. Run `npm install` in the root directory of the app/bot files.
 5. Run `node index.js` and answer the prompted questions to set up the app/bot.
 
-    <img alt="Setup" src="image" width="300"/>
+    <img alt="Setup" src="https://usercontent.catto.pictures/hirzi/e0d50227-96e6-4624-9298-c8db67bb333a.png" width="300"/>
 
     - [Getting an Panel API key](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/getting-panel-api-key.md)
     - [Getting a Channel ID](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/getting-channel-id.md)
-    - [Getting a Server ID]()
+    - [Getting a Server ID](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/getting-server-id.md)
 
 6. Run `node index.js` if you want to start the app/bot again, and you're done!
 
-    <img alt="Console Logging" src="image" width="300"/>
+    <img alt="Console Logging" src="https://usercontent.catto.pictures/hirzi/5d9a51a0-8ac0-4973-93a0-afec1aaed984.png" width="300"/>
 
 ## Reporting a Bug
 Enable `log_error` in the `config.yml` file and check the console for the error message. After that, report it to our Discord server at [Support Server](https://discord.znproject.my.id).

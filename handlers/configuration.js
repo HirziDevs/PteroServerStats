@@ -19,7 +19,7 @@ try {
 }
 
 if (config.version !== 1) {
-    console.error('Config Error | Invalid config version! The config has been updated. Please get the new config format from: \n>> https://github.com/HirziDevs/PteroStats/blob/main/config.yml <<');
+    console.error('Config Error | Invalid config version! The config has been updated. Please get the new config format from: \n>> https://github.com/HirziDevs/PteroServerStats/blob/main/config.yml <<');
     process.exit();
 }
 

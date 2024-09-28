@@ -23,15 +23,15 @@ module.exports = async function sendMessage(client, server) {
 
 	if (config.server.details) {
 		if (config.server.memory)
-			embed.addFields({ inline: true, name: "Memory Usage", value: `\`${bytes.format(server.stats.resources.memory_bytes)}\` / \`${server.details.limits.memory === 0 ? "∞" : bytes(server.details.limits.memory * 1000000)}\`` });
+			embed.addFields({ inline: false, name: "Memory Usage", value: `\`${bytes.format(server.stats.resources.memory_bytes)}\` / \`${server.details.limits.memory === 0 ? "∞" : bytes(server.details.limits.memory * 1000000)}\`` });
 		if (config.server.disk)
-			embed.addFields({ inline: true, name: "Disk Usage", value: `\`${bytes.format(server.stats.resources.disk_bytes)}\` / \`${server.details.limits.disk === 0 ? "∞" : bytes(server.details.limits.disk * 1000000)}\`` });
+			embed.addFields({ inline: false, name: "Disk Usage", value: `\`${bytes.format(server.stats.resources.disk_bytes)}\` / \`${server.details.limits.disk === 0 ? "∞" : bytes(server.details.limits.disk * 1000000)}\`` });
 		if (config.server.cpu)
-			embed.addFields({ inline: true, name: "CPU Load", value: `\`${server.stats.resources.cpu_absolute.toFixed(2)}%\`` });
+			embed.addFields({ inline: false, name: "CPU Load", value: `\`${server.stats.resources.cpu_absolute.toFixed(2)}%\`` });
 		if (config.server.network)
-			embed.addFields({ inline: true, name: "Network", value: `Upload: \`${bytes.format(server.stats.resources.network_rx_bytes)}\`\nDownload: \`${bytes.format(server.stats.resources.network_tx_bytes)}\`` });
+			embed.addFields({ inline: false, name: "Network", value: `Upload: \`${bytes.format(server.stats.resources.network_rx_bytes)}\`\nDownload: \`${bytes.format(server.stats.resources.network_tx_bytes)}\`` });
 		if (config.server.uptime)
-			embed.addFields({ inline: true, name: "Uptime", value: `\`${uptimeFormatter(server.stats.resources.uptime)}\`` });
+			embed.addFields({ inline: false, name: "Uptime", value: `\`${uptimeFormatter(server.stats.resources.uptime)}\`` });
 	}
 
 	await message?.edit({ embeds: [embed] }) || channel.send({ embeds: [embed] });
