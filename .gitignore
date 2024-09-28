@@ -1,7 +1,7 @@
-config-dev.yml
 package-lock.json
-.vscode
+.setup-complete
+config-dev.yml
 node_modules
 cache.json
+.vscode
 .env
-.setup-complete

@@ -1,6 +1,6 @@
-const { WebhookClient, EmbedBuilder } = require("discord.js")
-const config = require("./configuration")
-const cliColor = require("cli-color")
+const { WebhookClient, EmbedBuilder } = require("discord.js");
+const config = require("./configuration");
+const cliColor = require("cli-color");
 
 module.exports = function Webhook(embed) {
     if (config.notifier.enable) {

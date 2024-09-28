@@ -2,11 +2,11 @@
 # Need help? Join our Discord server: https://discord.znproject.my.id
 version: 1 # Warning: Do not change this unless you know what you are doing!
 
-# App Presence Configuration
+# App/Bot Presence Configuration
 presence:
-  enable: true # Enable or disable app presence.
+  enable: true # Enable or disable app presence (true/false).
   text: "Server" # The status text shown by the app.
-  type: "watching" # Available types: 'watching', 'playing', 'listening', 'competing'. (Note: 'streaming' is currently unsupported)
+  type: "watching" # Available types: 'watching', 'playing', 'listening', 'competing'. (Note: 'streaming' is currently not supported)
   status: "online" # Available types: 'online', 'idle', 'dnd', or 'invisible'
 
 # Discord Channel and Refresh Timing Configuration
@@ -16,7 +16,7 @@ timeout: 5 # Timeout in seconds for node responses. Adjusting this will affect t
 # Message and Embed Configuration
 # To disable an option, leave the value as an empty string: ''
 message:
-  content: "" # Custom content for app messages. Set to '' to disable.
+  content: "" # Custom content for app messages.
   attachment: "" # Attachments will delay stats refresh since they are uploaded first.
 
 embed:
@@ -37,10 +37,10 @@ embed:
   
 # Message Button Configuration
 button:
-  enable: true # Enable or disable buttons in messages.
+  enable: false # Enable or disable buttons in messages (true/false).
   row1:
-    - label: "Panel" # Label for the first button.
-      url: "https://panel.example.com" # URL for the first button.
+    - label: "Home" # Label for the first button.
+      url: "https://home.example.com" # URL for the first button.
 #    - label: "Dashboard" # Remove "#" at the start of the line to use this button
 #      url: "https://dash.example.com" # Remove "#" at the start of the line to use this button
 #  row2: # Remove "#" at the start of the line to use this row
@@ -56,7 +56,6 @@ status:
   offline: ":red_circle: Offline" # Status message for when a server is offline.
 
 # Server Settings
-# How to get Server ID: https://github.com/HirziDevs/PteroServerStats/blob/main/guide/server-id.md
 server:
   details: true # Show server details such as memory and disk usage (true/false).
   memory: true # Show server memory usage field (true/false).
@@ -82,5 +81,5 @@ notifier:
     image: "" # Image URL for the notifier stats embed.
 
 # Error Logging Configuration
-# Enable logging to console if servers go offline, useful for debugging.
-log_error: false # Set to true to enable error logging.
+# Enable error logging for debugging.
+log_error: false # Set to true to enable error logging (true/false).

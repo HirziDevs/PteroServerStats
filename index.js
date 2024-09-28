@@ -1,6 +1,6 @@
-const fs = require("node:fs");
-const cliColor = require("cli-color");
 const package = require("./package.json");
+const cliColor = require("cli-color");
+const fs = require("node:fs");
 
 console.log(
     `    _${cliColor.blueBright.bold(`${cliColor.underline("Ptero")}dact${cliColor.underline("yl & P")}eli${cliColor.underline("can")}_${cliColor.underline("Se")}rver`)}______   ______   \n` +

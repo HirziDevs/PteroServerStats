@@ -1,8 +1,8 @@
 require("dotenv").config();
 const { Client, GatewayIntentBits, ActivityType } = require("discord.js");
-const cliColor = require("cli-color");
 const config = require("./configuration.js");
-const getStats = require("./getStats.js")
+const getStats = require("./getStats.js");
+const cliColor = require("cli-color");
 
 module.exports = function Application() {
     console.log(cliColor.cyanBright("[PSS] ") + cliColor.green("Starting app..."));
