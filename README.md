@@ -22,7 +22,7 @@ A Discord App/Bot designed to check server stats running on Pterodactyl or Pelic
 - [Notifier](https://github.com/HirziDevs/PteroServerStats/blob/main/guide/notifier.md)
 
 ### Starting the App/Bot
-1. [Create your Discord App/Bot](https://discordjs.guide/preparations/adding-your-bot-to-servers.html).
+1. [Create your Discord App/Bot](https://discordjs.guide/preparations/setting-up-a-bot-application.html).
 2. [Invite your Discord App/Bot to your Discord server](https://discordjs.guide/preparations/adding-your-bot-to-servers.html).
 3. Download this repository:
     - Manually: [Download this repository](https://github.com/HirziDevs/PteroServerStats/archive/refs/heads/main.zip) and extract it.
