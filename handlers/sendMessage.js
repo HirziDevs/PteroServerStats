@@ -3,6 +3,7 @@ const { EmbedBuilder, time } = require("discord.js");
 const config = require("./configuration.js");
 const webhook = require("./webhook.js");
 const cliColor = require("cli-color");
+const bit = require("prettier-bytes");
 const path = require("node:path");
 const bytes = require("bytes");
 const fs = require("node:fs");
@@ -50,13 +51,13 @@ module.exports = async function sendMessage(client, server) {
 
 	if (config.server.details) {
 		if (config.server.memory)
-			embed.addFields({ inline: config.embed.fields.inline, name: "Memory Usage", value: `\`${bytes.format(server.stats.resources.memory_bytes, { unitSeparator: " " })}\` / \`${server.details.limits.memory === 0 ? "∞" : bytes(server.details.limits.memory * 1000000)}\`` });
+			embed.addFields({ inline: config.embed.fields.inline, name: "Memory Usage", value: `\`${bytes.format(server.stats.resources.memory_bytes, { unitSeparator: " " })}\` / \`${server.details.limits.memory === 0 ? "∞" : bit(server.details.limits.memory * 1000000)}\`` });
 		if (config.server.disk)
-			embed.addFields({ inline: config.embed.fields.inline, name: "Disk Usage", value: `\`${bytes.format(server.stats.resources.disk_bytes, { unitSeparator: " " })}\` / \`${server.details.limits.disk === 0 ? "∞" : bytes(server.details.limits.disk * 1000000)}\`` });
+			embed.addFields({ inline: config.embed.fields.inline, name: "Disk Usage", value: `\`${bytes.format(server.stats.resources.disk_bytes, { unitSeparator: " " })}\` / \`${server.details.limits.disk === 0 ? "∞" : bit(server.details.limits.disk * 1000000)}\`` });
 		if (config.server.cpu)
 			embed.addFields({ inline: config.embed.fields.inline, name: "CPU Load", value: `\`${server.stats.resources.cpu_absolute.toFixed(2)}%\`` });
 		if (config.server.network)
-			embed.addFields({ inline: config.embed.fields.inline, name: "Network", value: `Upload: \`${bytes.format(server.stats.resources.network_rx_bytes)}\`\nDownload: \`${bytes.format(server.stats.resources.network_tx_bytes)}\`` });
+			embed.addFields({ inline: config.embed.fields.inline, name: "Network", value: `Upload: \`${bytes.format(server.stats.resources.network_rx_bytes, { unitSeparator: " " })}\`\nDownload: \`${bytes.format(server.stats.resources.network_tx_bytes, { unitSeparator: " " })}\`` });
 		if (config.server.uptime)
 			embed.addFields({ inline: config.embed.fields.inline, name: "Uptime", value: `\`${uptimeFormatter(server.stats.resources.uptime)}\`` });
 	}
