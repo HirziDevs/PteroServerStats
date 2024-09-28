@@ -1,10 +1,37 @@
-const { EmbedBuilder, time } = require("discord.js");
-const cliColor = require("cli-color");
-const bytes = require("bytes");
-const config = require("./configuration.js");
 const uptimeFormatter = require("./uptimeFormatter.js");
+const { EmbedBuilder, time } = require("discord.js");
+const config = require("./configuration.js");
+const webhook = require("./webhook.js");
+const cliColor = require("cli-color");
+const path = require("node:path");
+const bytes = require("bytes");
+const fs = require("node:fs");
 
 module.exports = async function sendMessage(client, server) {
+    let cache = (() => {
+        try {
+            return JSON.parse(fs.readFileSync(path.join(__dirname, "../cache.json")))
+        } catch {
+            return false
+        }
+    })()
+	
+	if (server.stats.current_state === "missing" && cache?.stats.current_state !== "missing") webhook(
+		new EmbedBuilder()
+	        .setTitle("Server down")
+			.setColor("ED4245")
+            .setDescription(`Server \`${server.details.name}\` is down.`)
+	)
+	else if (server.stats.current_state !== "missing" && cache?.stats.current_state === "missing") webhook(
+		new EmbedBuilder()
+		    .setTitle("Server online")
+			.setColor("57F287")
+            .setDescription(`Server \`${server.details.name}\` is back online.`)
+	)
+	
+    fs.writeFileSync("cache.json", JSON.stringify(server, null, 2), "utf8");
+
+	
 	const channel = await client.channels.fetch(process.env.DiscordChannel);
 
 	const messages = await channel.messages.fetch({ limit: 10 });
