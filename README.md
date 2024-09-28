@@ -2,6 +2,8 @@
 
 # PteroServerStats
 
+<img alt="PteroServerStats Image Preview" src="https://usercontent.catto.pictures/hirzi/fd17737b-5233-47b1-b9be-5bd69080cd95.png" width="300"/>
+
 </div>
 
 ## Introduction
@@ -41,7 +43,7 @@ A Discord App/Bot designed to check server stats running on Pterodactyl or Pelic
     <img alt="Console Logging" src="https://usercontent.catto.pictures/hirzi/5d9a51a0-8ac0-4973-93a0-afec1aaed984.png" width="300"/>
 	
 ## Similar Projects
-- PteroStats
+- []PteroStats](https://github.com/HirziDevs/PteroStats)
 
     PteroStats is a Discord App/Bot designed to check Pterodactyl or Pelican Panel stats and post it to your Discord server.
 	
