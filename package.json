@@ -2,7 +2,7 @@
   "name": "pteroserverstats",
   "version": "1.0.0",
   "author": "HirziDevs",
-  "description": "A Discord App/Bot designed to check server stats running on Pterodactyl or Pelican panel and post it to your Discord server.",
+  "description": "PteroServerStats is a Discord App/Bot designed to check server stats running on Pterodactyl or Pelican panel and post it to your Discord server.",
   "main": "index.js",
   "license": "MIT",
   "bugs": {

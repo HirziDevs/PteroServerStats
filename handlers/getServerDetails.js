@@ -8,7 +8,20 @@ module.exports = async function getAllNodes() {
             Authorization: `Bearer ${process.env.PanelKEY}`,
         },
     })
-        .then((res) => res.data.attributes)
+        .then(({ data: { attributes } }) => {
+            return {
+                uuid: attributes.uuid,
+                name: attributes.name,
+                limits: {
+                    memory: attributes.limits.memory,
+                    swap: attributes.limits.swap,
+                    disk: attributes.limits.disk,
+                    io: attributes.limits.io,
+                    cpu: attributes.limits.cpu,
+                    threads: attributes.limits.threads,
+                },
+            }
+        })
         .catch((error) => {
             if (error.code === "ENOTFOUND") {
                 console.log(cliColor.cyanBright("[PSS] ") + cliColor.redBright("ENOTFOUND | DNS Error. Ensure your network connection and DNS server are functioning correctly."));
@@ -35,7 +48,7 @@ module.exports = async function getAllNodes() {
                     console.log(cliColor.cyanBright("[PSS] ") + cliColor.redBright(`${error.response.status} | Unexpected error: ${error.response.statusText}`));
                 }
             } else {
-                console.log(cliColor.cyanBright("[PSS] ") + cliColor.redBright(`Unexpected error: ${error.message}`));
+                console.log(cliColor.cyanBright("[PSS] ") + cliColor.redBright(`Unexpected error: `), error);
             }
             return false
         })

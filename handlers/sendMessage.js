@@ -9,30 +9,30 @@ const bytes = require("bytes");
 const fs = require("node:fs");
 
 module.exports = async function sendMessage(client, server) {
-    let cache = (() => {
-        try {
-            return JSON.parse(fs.readFileSync(path.join(__dirname, "../cache.json")))
-        } catch {
-            return false
-        }
-    })()
-	
+	let cache = (() => {
+		try {
+			return JSON.parse(fs.readFileSync(path.join(__dirname, "../cache.json")))
+		} catch {
+			return false
+		}
+	})()
+
 	if (server.stats.current_state === "missing" && cache?.stats.current_state !== "missing") webhook(
 		new EmbedBuilder()
-	        .setTitle("Server down")
+			.setTitle("Server down")
 			.setColor("ED4245")
-            .setDescription(`Server \`${server.details.name}\` is down.`)
+			.setDescription(`Server \`${server.details.name}\` is down.`)
 	)
 	else if (server.stats.current_state !== "missing" && cache?.stats.current_state === "missing") webhook(
 		new EmbedBuilder()
-		    .setTitle("Server online")
+			.setTitle("Server online")
 			.setColor("57F287")
-            .setDescription(`Server \`${server.details.name}\` is back online.`)
+			.setDescription(`Server \`${server.details.name}\` is back online.`)
 	)
-	
-    fs.writeFileSync("cache.json", JSON.stringify(server, null, 2), "utf8");
 
-	
+	fs.writeFileSync("cache.json", JSON.stringify(server, null, 2), "utf8");
+
+
 	const channel = await client.channels.fetch(process.env.DiscordChannel);
 
 	const messages = await channel.messages.fetch({ limit: 10 });
@@ -49,7 +49,7 @@ module.exports = async function sendMessage(client, server) {
 		.setFooter({ text: config.embed.footer.text || null, iconURL: config.embed.footer.icon || null })
 		.addFields({ name: "Status", value: ["starting", "running"].includes(server.stats.current_state) ? config.status.online : config.status.offline });
 
-	if (config.server.details) {
+	if (config.server.details && ["starting", "running"].includes(server.stats.current_state)) {
 		if (config.server.memory)
 			embed.addFields({ inline: config.embed.fields.inline, name: "Memory Usage", value: `\`${bytes.format(server.stats.resources.memory_bytes, { unitSeparator: " " })}\` / \`${server.details.limits.memory === 0 ? "∞" : bit(server.details.limits.memory * 1000000)}\`` });
 		if (config.server.disk)
@@ -63,31 +63,31 @@ module.exports = async function sendMessage(client, server) {
 	}
 
 	try {
-	    await message?.edit({ embeds: [embed] }) || channel.send({ embeds: [embed] });
-	    console.log(
+		await message?.edit({ embeds: [embed] }) || channel.send({ embeds: [embed] });
+		console.log(
 			cliColor.cyanBright("[PSS] ") + cliColor.green(`Server stats successfully posted to the ${cliColor.blueBright(channel.name)} channel!`)
-	    );
+		);
 	} catch (error) {
-        try {
-            if (error.rawError?.code === 429) {
-                console.log(cliColor.cyanBright("[PSS] ") + cliColor.redBright("Error 429 | Your IP has been rate limited by either Discord or your website. If it's a rate limit with Discord, you must wait. If it's a issue with your website, consider whitelisting your server IP."));
-            } else if (error.rawError?.code === 403) {
-                console.log(cliColor.cyanBright("[PSS] ") + cliColor.redBright("FORBIDDEN | The channel ID you provided is incorrect. Please double check you have the right ID. If you're not sure, read our documentation: \n>>https://github.com/HirziDevs/PteroServerStats/blob/main/guide/channel-id.md<<"));
-            } else if (error.code === "ENOTFOUND") {
-                console.log(cliColor.cyanBright("[PSS] ") + cliColor.redBright("ENOTFOUND | DNS Error. Ensure your network connection and DNS server are functioning correctly."));
-            } else if (error.rawError?.code === 50001) {
-                console.log(cliColor.cyanBright("[PSS] ") + cliColor.redBright("Discord Error | Your discord bot doesn't have access to see/send message/edit message in the channel!"));
-            } else if (error.rawError?.errors && Object?.values(error.rawError.errors)[0]?._errors[0]?.code === "MAX_EMBED_SIZE_EXCEEDED") {
-                console.log(cliColor.cyanBright("[PSS] ") + cliColor.redBright("Discord Error | Embed message limit exceeded! Please limit or decrease the nodes that need to be shown in the config!"));
-            } else if (error.rawError?.errors && Object?.values(error.rawError.errors)[0]?._errors[0]?.code) {
-                console.log(Object.values(error.rawError.errors)[0]._errors[0].message);
-            } else {
-                console.error(cliColor.cyanBright("[PSS] ") + cliColor.redBright("Discord Error"), error);
-            }
-            process.exit();
-        } catch (err) {
-            console.error(error)
-            process.exit();
-        }
-    }
+		try {
+			if (error.rawError?.code === 429) {
+				console.log(cliColor.cyanBright("[PSS] ") + cliColor.redBright("Error 429 | Your IP has been rate limited by either Discord or your website. If it's a rate limit with Discord, you must wait. If it's a issue with your website, consider whitelisting your server IP."));
+			} else if (error.rawError?.code === 403) {
+				console.log(cliColor.cyanBright("[PSS] ") + cliColor.redBright("FORBIDDEN | The channel ID you provided is incorrect. Please double check you have the right ID. If you're not sure, read our documentation: \n>>https://github.com/HirziDevs/PteroServerStats/blob/main/guide/channel-id.md<<"));
+			} else if (error.code === "ENOTFOUND") {
+				console.log(cliColor.cyanBright("[PSS] ") + cliColor.redBright("ENOTFOUND | DNS Error. Ensure your network connection and DNS server are functioning correctly."));
+			} else if (error.rawError?.code === 50001) {
+				console.log(cliColor.cyanBright("[PSS] ") + cliColor.redBright("Discord Error | Your discord bot doesn't have access to see/send message/edit message in the channel!"));
+			} else if (error.rawError?.errors && Object?.values(error.rawError.errors)[0]?._errors[0]?.code === "MAX_EMBED_SIZE_EXCEEDED") {
+				console.log(cliColor.cyanBright("[PSS] ") + cliColor.redBright("Discord Error | Embed message limit exceeded! Please limit or decrease the nodes that need to be shown in the config!"));
+			} else if (error.rawError?.errors && Object?.values(error.rawError.errors)[0]?._errors[0]?.code) {
+				console.log(Object.values(error.rawError.errors)[0]._errors[0].message);
+			} else {
+				console.error(cliColor.cyanBright("[PSS] ") + cliColor.redBright("Discord Error"), error);
+			}
+			process.exit();
+		} catch (err) {
+			console.error(error)
+			process.exit();
+		}
+	}
 }

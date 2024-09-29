@@ -2,7 +2,6 @@ const getServerDetails = require("./getServerDetails.js");
 const getServerStats = require("./getServerStats.js");
 const promiseTimeout = require("./promiseTimeout.js");
 const sendMessage = require("./sendMessage.js");
-const { EmbedBuilder } = require("discord.js");
 const config = require("./configuration.js");
 const cliColor = require("cli-color");
 const fs = require("node:fs");
@@ -15,6 +14,8 @@ module.exports = async function getStats(client) {
 
         console.log(cliColor.cyanBright("[PSS] ") + cliColor.yellow("Fetching server resources..."))
         const stats = await promiseTimeout(getServerStats(), config.timeout * 1000);
+        if (stats.current_state === "missing") console.log(cliColor.cyanBright("[PSS] ") + cliColor.redBright("Server is currently down."))
+        else console.log(cliColor.cyanBright("[PSS] ") + cliColor.green("Server state is normal."))
 
         const data = {
             details,
@@ -26,7 +27,7 @@ module.exports = async function getStats(client) {
         return data
     } catch (error) {
         if (config.log_error) console.error(error)
-        console.log(cliColor.cyanBright("[PSS] ") + cliColor.redBright("Server is currently offline."));
+        console.log(cliColor.cyanBright("[PSS] ") + cliColor.redBright("Server is currently down."));
 
         if (fs.existsSync("cache.json")) {
             try {
@@ -43,7 +44,7 @@ module.exports = async function getStats(client) {
                         uptime: 0
                     }
                 }
-			
+
                 sendMessage(client, data)
                 return data
             } catch {

@@ -8,7 +8,12 @@ module.exports = async function getWingsStatus() {
             Authorization: `Bearer ${process.env.PanelKEY}`,
         },
     })
-        .then((res) => res.data.attributes)
+        .then(({ data: { attributes } }) => {
+            return {
+                current_state: attributes.current_state,
+                resources: attributes.resources
+            }
+        })
         .catch((error) => {
             if (config.log_error) console.error(error);
             return false
