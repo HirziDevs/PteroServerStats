@@ -17,13 +17,13 @@ module.exports = async function sendMessage(client, server) {
 		}
 	})()
 
-	if (server.stats.current_state === "missing" && cache?.stats.current_state !== "missing") webhook(
+	if (server.stats.current_state === "missing" && cache?.stats?.current_state !== "missing") webhook(
 		new EmbedBuilder()
 			.setTitle("Server down")
 			.setColor("ED4245")
 			.setDescription(`Server \`${server.details.name}\` is down.`)
 	)
-	else if (server.stats.current_state !== "missing" && cache?.stats.current_state === "missing") webhook(
+	else if (server.stats.current_state !== "missing" && cache?.stats?.current_state === "missing") webhook(
 		new EmbedBuilder()
 			.setTitle("Server online")
 			.setColor("57F287")
